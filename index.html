@@ -149,8 +149,8 @@
           <div class="ab-tip"><div class="ab-dot red"></div>Avant = enregistrement brut (home studio)</div>
           <div class="ab-tip"><div class="ab-dot green"></div>Apres = mixage + mastering pro</div>
         </div>
-        <audio id="a-before" preload="auto" src="audio/demo1-before.mp3"></audio>
-        <audio id="a-after" preload="auto" src="audio/demo1-after.mp3"></audio>
+        <audio id="a-before" preload="auto" src="audio/demo1-before.wav"></audio>
+        <audio id="a-after" preload="auto" src="audio/demo1-after.wav"></audio>
       </div>
     </section>
 
@@ -268,8 +268,8 @@
       aB.pause(); aA.pause(); playing = false; playBtn.innerText = '▶';
       document.querySelectorAll('.ab-tab').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
-      if (key === 'demo1') { document.getElementById('ab-title').innerText = 'Rappeur X — Titre Single'; document.getElementById('ab-desc').innerText = 'Focus : EQ voix, nettoyage basses, largeur stereo, LUFS -14dB'; aB.src = 'audio/demo1-before.mp3'; aA.src = 'audio/demo1-after.mp3'; }
-      else { document.getElementById('ab-title').innerText = 'Artiste Y — Track Drill'; document.getElementById('ab-desc').innerText = 'Focus : Saturation tube, compression parallele, clarte 808'; aB.src = 'audio/demo2-before.mp3'; aA.src = 'audio/demo2-after.mp3'; }
+      if (key === 'demo1') { document.getElementById('ab-title').innerText = 'Rappeur X — Titre Single'; document.getElementById('ab-desc').innerText = 'Focus : EQ voix, nettoyage basses, largeur stereo, LUFS -14dB'; aB.src = 'audio/demo1-before.wav'; aA.src = 'audio/demo1-after.wav'; }
+      else { document.getElementById('ab-title').innerText = 'Artiste Y — Track Drill'; document.getElementById('ab-desc').innerText = 'Focus : Saturation tube, compression parallele, clarte 808'; aB.src = 'audio/demo2-before.wav'; aA.src = 'audio/demo2-after.wav'; }
       aB.load(); aA.load(); switchMode('after');
     }
   </script>
