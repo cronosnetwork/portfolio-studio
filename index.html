@@ -3,246 +3,274 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio Mixage & Mastering | Ingenierie Son</title>
+  <title>Studio Mixage & Mastering Professionnel</title>
+  <meta name="description" content="Service de mixage et mastering professionnel pour artistes independants. Comparateur A/B avant/apres. Tarifs transparents.">
+  <meta property="og:title" content="Studio Mixage & Mastering">
+  <meta property="og:description" content="Mixage et mastering pro — Ecoutez la difference avant/apres.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎚️</text></svg>">
   <style>
     :root {
-      --bg-color: #0b0f19;
-      --card-bg: #131b2e;
-      --accent-color: #06b6d4;
-      --accent-hover: #0891b2;
-      --before-color: #ef4444;
-      --after-color: #10b981;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --border-color: #1e293b;
+      --bg: #080b14;
+      --bg2: #0e1220;
+      --card: #121829;
+      --accent: #06b6d4;
+      --accent2: #22d3ee;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --before: #ef4444;
+      --after: #22c55e;
+      --text: #f1f5f9;
+      --muted: #64748b;
+      --border: #1a2340;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding-bottom: 60px; }
-    header { padding: 4rem 1.5rem 3rem; text-align: center; background: radial-gradient(circle at top, rgba(6, 182, 212, 0.15) 0%, rgba(11, 15, 25, 0) 70%); border-bottom: 1px solid var(--border-color); }
-    .badge { display: inline-block; background: rgba(6, 182, 212, 0.1); color: var(--accent-color); border: 1px solid rgba(6, 182, 212, 0.3); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
-    header h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
-    header p { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto 2rem auto; }
-    .hero-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary { background: var(--accent-color); color: #000; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; transition: background 0.2s; }
-    .btn-primary:hover { background: var(--accent-hover); }
-    .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
-    .btn-outline:hover { border-color: var(--accent-color); }
-    main { max-width: 950px; margin: 3rem auto; padding: 0 1.5rem; }
-    .section-title { text-align: center; margin-bottom: 2rem; }
-    .section-title h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    .section-title p { color: var(--text-muted); }
-    .ab-player-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin-bottom: 3rem; }
-    .track-selector { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
-    .track-tab { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap; }
-    .track-tab.active { background: rgba(6, 182, 212, 0.15); color: var(--accent-color); border-color: var(--accent-color); }
-    .ab-toggle-container { display: flex; justify-content: center; align-items: center; gap: 1rem; background: #0b0f19; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); margin: 1.5rem 0; }
-    .ab-btn { flex: 1; padding: 1rem; border-radius: 8px; border: 2px solid transparent; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease; }
-    .ab-btn-before { background: rgba(239, 68, 68, 0.1); color: var(--before-color); border-color: rgba(239, 68, 68, 0.3); }
-    .ab-btn-before.active { background: var(--before-color); color: white; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
-    .ab-btn-after { background: rgba(16, 185, 129, 0.1); color: var(--after-color); border-color: rgba(16, 185, 129, 0.3); }
-    .ab-btn-after.active { background: var(--after-color); color: white; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
-    .player-controls { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; }
-    .main-play-btn { width: 54px; height: 54px; border-radius: 50%; background: var(--accent-color); border: none; color: #000; font-size: 1.4rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .progress-bar-container { flex: 1; }
-    .progress-bar { width: 100%; height: 8px; background: #1e293b; border-radius: 4px; outline: none; cursor: pointer; accent-color: var(--accent-color); }
-    .time-display { font-size: 0.85rem; color: var(--text-muted); font-family: monospace; min-width: 80px; }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-    .service-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.8rem; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; }
-    .service-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-    .price { font-size: 2rem; font-weight: 800; color: var(--accent-color); margin: 1rem 0; }
-    .price span { font-size: 0.9rem; color: var(--text-muted); font-weight: normal; }
-    .service-card ul { list-style: none; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
-    .service-card ul li { margin-bottom: 0.5rem; }
-    .service-card ul li::before { content: "✓ "; color: var(--accent-color); }
-    .lead-box { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(19, 27, 46, 1) 100%); border: 1px solid var(--accent-color); padding: 2.5rem; border-radius: 16px; text-align: center; margin-top: 4rem; }
-    .lead-box h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
-    .lead-box p { color: var(--text-muted); max-width: 550px; margin: 0 auto 1.5rem auto; }
-    @media (max-width: 600px) { header h1 { font-size: 2rem; } .ab-btn { font-size: 0.9rem; padding: 0.75rem; } }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; }
+    ::selection { background: var(--accent); color: #000; }
+
+    /* Header */
+    .hero { padding: 5rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -40%; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); pointer-events: none; }
+    .badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.25); color: var(--accent); padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1rem; background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem auto; }
+    .hero-btns { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.4rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); }
+
+    /* Container */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { margin-bottom: 4rem; }
+    .section-head { text-align: center; margin-bottom: 2.5rem; }
+    .section-head h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .section-head p { color: var(--muted); }
+
+    /* AB Player */
+    .ab-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .ab-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
+    .ab-tab { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--muted); padding: 0.55rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; white-space: nowrap; transition: all 0.2s; }
+    .ab-tab.active { background: rgba(6, 182, 212, 0.12); color: var(--accent); border-color: var(--accent); }
+    .ab-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .ab-toggle { display: flex; gap: 0.75rem; background: var(--bg); padding: 0.75rem; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .ab-btn { flex: 1; padding: 0.85rem; border-radius: 8px; border: 2px solid transparent; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em; transition: all 0.2s; text-align: center; }
+    .ab-before { background: rgba(239, 68, 68, 0.08); color: var(--before); border-color: rgba(239, 68, 68, 0.25); }
+    .ab-before.active { background: var(--before); color: white; box-shadow: 0 0 20px rgba(239, 68, 68, 0.35); }
+    .ab-after { background: rgba(34, 197, 94, 0.08); color: var(--after); border-color: rgba(34, 197, 94, 0.25); }
+    .ab-after.active { background: var(--after); color: white; box-shadow: 0 0 20px rgba(34, 197, 94, 0.35); }
+    .ab-controls { display: flex; align-items: center; gap: 1rem; }
+    .ab-play { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); border: none; color: #000; font-size: 1.2rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.1s; flex-shrink: 0; }
+    .ab-play:hover { transform: scale(1.06); }
+    .ab-progress { flex: 1; }
+    .ab-progress input[type="range"] { width: 100%; height: 6px; background: var(--border); border-radius: 3px; outline: none; cursor: pointer; accent-color: var(--accent); }
+    .ab-time { font-size: 0.8rem; color: var(--muted); font-family: monospace; min-width: 80px; text-align: right; }
+    .ab-tips { margin-top: 1.2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .ab-tip { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--muted); }
+    .ab-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .ab-dot.red { background: var(--before); }
+    .ab-dot.green { background: var(--after); }
+
+    /* Services */
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.25rem; }
+    .svc { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; display: flex; flex-direction: column; transition: border-color 0.2s; }
+    .svc:hover { border-color: rgba(6, 182, 212, 0.3); }
+    .svc.featured { border-color: var(--accent); position: relative; }
+    .svc-badge { position: absolute; top: -0.6rem; left: 1.5rem; background: var(--accent); color: #000; font-size: 0.65rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .svc h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+    .svc .desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+    .svc .price { font-size: 2rem; font-weight: 800; color: var(--accent); margin-bottom: 1rem; }
+    .svc .price span { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+    .svc ul { list-style: none; margin-bottom: 1.5rem; flex: 1; }
+    .svc ul li { font-size: 0.88rem; color: var(--muted); padding: 0.3rem 0; }
+    .svc ul li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+    .svc .btn { width: 100%; justify-content: center; }
+
+    /* Lead Magnet */
+    .lead { background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, var(--card) 100%); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 16px; padding: 3rem 2rem; text-align: center; margin-top: 2rem; }
+    .lead h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .lead p { color: var(--muted); max-width: 500px; margin: 0 auto 1.5rem auto; }
+
+    /* Testimonials */
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .testi { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .testi-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .testi p { font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 0.75rem; }
+    .testi .author { font-size: 0.8rem; font-weight: 600; }
+
+    /* Footer */
+    .footer { text-align: center; padding: 3rem 1.5rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .ab-btn { font-size: 0.8rem; padding: 0.65rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .ab-toggle { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <span class="badge">AUDIO ENGINEERING STUDIO</span>
-    <h1>Mixage & Mastering Professionnel</h1>
-    <p>Donnez a vos morceaux le volume, la clarte et l'impact des standards industriels (Spotify, Apple Music, Radio).</p>
-    <div class="hero-buttons">
-      <a href="#test-gratuit" class="btn-primary">Tester gratuitement 30s</a>
-      <a href="#demo" class="btn-outline">Ecouter les demos A/B</a>
+
+  <section class="hero">
+    <div class="badge">🎚️ Audio Engineering Studio</div>
+    <h1>Mixage & Mastering Pro</h1>
+    <p>Donnez a vos morceaux le volume, la clarte et l'impact des standards industriels — Spotify, Apple Music, Radio.</p>
+    <div class="hero-btns">
+      <a href="#demo" class="btn btn-primary">🎧 Ecouter la demo A/B</a>
+      <a href="#tarifs" class="btn btn-outline">Voir les tarifs</a>
+      <a href="#test" class="btn btn-outline">Test gratuit 30s</a>
     </div>
-  </header>
-  <main>
-    <section id="demo">
-      <div class="section-title">
+  </section>
+
+  <div class="container">
+
+    <section class="section" id="demo">
+      <div class="section-head">
         <h2>Comparateur Avant / Apres</h2>
-        <p>Basculez entre le son brut enregistre en home-studio et le resultat final mixe/masterise.</p>
+        <p>Basculez en un clic entre le son brut et le resultat mixe/masterise.</p>
       </div>
-      <div class="ab-player-card">
-        <div class="track-selector">
-          <button class="track-tab active" onclick="loadTrack('demo1', this)">Morceau 1 (Rap / Trap)</button>
-          <button class="track-tab" onclick="loadTrack('demo2', this)">Morceau 2 (Drill / Melodic)</button>
+      <div class="ab-card">
+        <div class="ab-tabs">
+          <button class="ab-tab active" onclick="loadTrack('demo1', this)">Morceau 1 — Rap / Trap</button>
+          <button class="ab-tab" onclick="loadTrack('demo2', this)">Morceau 2 — Drill</button>
         </div>
-        <h3 id="current-track-title">Rappeur X - Titre Single</h3>
-        <p id="current-track-desc" style="font-size: 0.85rem; color: var(--text-muted);">Focus : EQ voix, nettoyage basses, largeur stereo & LUFS (-14dB)</p>
-        <div class="ab-toggle-container">
-          <button id="btn-before" class="ab-btn ab-btn-before" onclick="switchAudioMode('before')">🔴 AVANT (Non Mixe)</button>
-          <button id="btn-after" class="ab-btn ab-btn-after active" onclick="switchAudioMode('after')">🟢 APRES (Mixe & Masterise)</button>
+        <h3 id="ab-title">Rappeur X — Titre Single</h3>
+        <p class="ab-desc" id="ab-desc">Focus : EQ voix, nettoyage basses, largeur stereo, LUFS -14dB</p>
+        <div class="ab-toggle">
+          <button id="btn-before" class="ab-btn ab-before" onclick="switchMode('before')">🔴 AVANT (Brut)</button>
+          <button id="btn-after" class="ab-btn ab-after active" onclick="switchMode('after')">🟢 APRES (Mixe & Masterise)</button>
         </div>
-        <div class="player-controls">
-          <button id="main-play-btn" class="main-play-btn" onclick="togglePlay()">▶</button>
-          <div class="progress-bar-container">
-            <input type="range" id="seek-bar" class="progress-bar" value="0" min="0" max="100" oninput="seekAudio(this.value)">
-          </div>
-          <div class="time-display">
-            <span id="time-current">0:00</span> / <span id="time-duration">0:00</span>
-          </div>
+        <div class="ab-controls">
+          <button id="ab-play" class="ab-play" onclick="togglePlay()">▶</button>
+          <div class="ab-progress"><input type="range" id="ab-seek" value="0" min="0" max="100" oninput="seek(this.value)"></div>
+          <div class="ab-time"><span id="ab-cur">0:00</span> / <span id="ab-dur">0:00</span></div>
         </div>
-        <audio id="audio-before" preload="auto" src="audio/demo1-before.mp3"></audio>
-        <audio id="audio-after" preload="auto" src="audio/demo1-after.mp3"></audio>
+        <div class="ab-tips">
+          <div class="ab-tip"><div class="ab-dot red"></div>Avant = enregistrement brut (home studio)</div>
+          <div class="ab-tip"><div class="ab-dot green"></div>Apres = mixage + mastering pro</div>
+        </div>
+        <audio id="a-before" preload="auto" src="audio/demo1-before.mp3"></audio>
+        <audio id="a-after" preload="auto" src="audio/demo1-after.mp3"></audio>
       </div>
     </section>
-    <section id="tarifs">
-      <div class="section-title">
-        <h2>Tarifs & Offres Studio</h2>
-        <p>Des tarifs transparents pour les artistes independants.</p>
+
+    <section class="section" id="tarifs">
+      <div class="section-head">
+        <h2>Tarifs & Offres</h2>
+        <p>Des prix transparents pour les artistes independants.</p>
       </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div>
-            <h3>Mastering Stereo</h3>
-            <p style="font-size:0.85rem; color: var(--text-muted);">Pour un morceau deja mixe qui a besoin du rendu final streaming.</p>
-            <div class="price">35 EUR <span>/ titre</span></div>
-            <ul>
-              <li>Optimisation dynamique & volume (Normes Streaming)</li>
-              <li>Nettoyage spectral & clarte</li>
-              <li>Livrables : WAV 24-bit HD + MP3 320kbps</li>
-              <li>2 revisions incluses</li>
-            </ul>
-          </div>
-          <a href="#test-gratuit" class="btn-outline" style="text-align:center;">Commander</a>
+      <div class="services">
+        <div class="svc">
+          <h3>Mastering Stereo</h3>
+          <div class="desc">Morceau deja mixe, besoin du rendu final streaming.</div>
+          <div class="price">35 € <span>/ titre</span></div>
+          <ul>
+            <li>Optimisation dynamique & volume</li>
+            <li>Normes Spotify / Apple Music</li>
+            <li>Livrables : WAV 24-bit + MP3 320k</li>
+            <li>2 revisions incluses</li>
+          </ul>
+          <a href="#test" class="btn btn-outline">Commander</a>
         </div>
-        <div class="service-card" style="border-color: var(--accent-color);">
-          <div>
-            <span class="badge" style="font-size:0.7rem; margin-bottom:0.5rem;">LE PLUS POPULAIRE</span>
-            <h3>Mixage Stems + Mastering</h3>
-            <p style="font-size:0.85rem; color: var(--text-muted);">Traitement complet de vos pistes separees (Voix, Beat, FX).</p>
-            <div class="price">90 EUR <span>/ titre</span></div>
-            <ul>
-              <li>Mixage complet (Jusqu'a 30 pistes)</li>
-              <li>Autotune / Correction pitch & calage rythme</li>
-              <li>Mastering offert inclus</li>
-              <li>3 revisions incluses</li>
-            </ul>
-          </div>
-          <a href="#test-gratuit" class="btn-primary" style="text-align:center;">Commander</a>
+        <div class="svc featured">
+          <div class="svc-badge">Populaire</div>
+          <h3>Mixage + Mastering</h3>
+          <div class="desc>Traitement complet de vos pistes separees.</div>
+          <div class="price">90 € <span>/ titre</span></div>
+          <ul>
+            <li>Mixage complet (jusqu'a 30 pistes)</li>
+            <li>Autotune & correction pitch</li>
+            <li>Mastering inclus</li>
+            <li>3 revisions incluses</li>
+          </ul>
+          <a href="#test" class="btn btn-primary">Commander</a>
         </div>
-        <div class="service-card">
-          <div>
-            <h3>Pack EP / Album</h3>
-            <p style="font-size:0.85rem; color: var(--text-muted);">Projet complet (5 a 10 titres) avec coherence sonore globale.</p>
-            <div class="price">Sur Devis</div>
-            <ul>
-              <li>Mixage & Mastering de tout le projet</li>
-              <li>Coherence de volume entre les titres</li>
-              <li>Archivage securise des sessions</li>
-              <li>Accompagnement et retours personnalises</li>
-            </ul>
-          </div>
-          <a href="#test-gratuit" class="btn-outline" style="text-align:center;">Contacter</a>
+        <div class="svc">
+          <h3>Pack EP / Album</h3>
+          <div class="desc">Projet complet avec coherence sonore globale.</div>
+          <div class="price">Sur devis</div>
+          <ul>
+            <li>Mixage & Mastering complet</li>
+            <li>Volume coherent entre titres</li>
+            <li>Archivage securise sessions</li>
+            <li>Accompagnement personnalise</li>
+          </ul>
+          <a href="#test" class="btn btn-outline">Contacter</a>
         </div>
       </div>
     </section>
-    <section id="test-gratuit">
-      <div class="lead-box">
-        <h3>Testez gratuitement sur votre propre son</h3>
-        <p>Envoyez un extrait de votre morceau (pistes brutes ou mix non masterise). Je vous renvoie une demo de 30 secondes masterisee sans aucun engagement.</p>
-        <a href="mailto:contact@example.com?subject=Demande%20de%20Test%20Gratuit%2030s" class="btn-primary" style="display:inline-block; font-size:1.1rem; padding: 0.9rem 2rem;">
-          Envoyer mon extrait (Gratuit)
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Ce que disent mes clients</h2>
+      </div>
+      <div class="testimonials">
+        <div class="testi">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Le mastering a transforme mon morceau. La difference est incroyable, on dirait un vrai son de radio."</p>
+          <div class="author">— Artiste independant, Paris</div>
+        </div>
+        <div class="testi">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Rapide, pro, et a l'ecoute. Le mixage de mon EP etait parfait. Je recommande a 100%."</p>
+          <div class="author">— Rappeur, Lyon</div>
+        </div>
+        <div class="testi">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Le comparateur A/B m'a convaincu en 10 secondes. Faut pas hésiter."</p>
+          <div class="author">— Beatmaker, Marseille</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="test">
+      <div class="lead">
+        <h3>Testez gratuitement sur votre son</h3>
+        <p>Envoyez un extrait de votre morceau (pistes brutes ou mix non masterise). Je vous renvoie une demo de 30 secondes masterisee, sans engagement.</p>
+        <a href="mailto:contact@example.com?subject=Test%20gratuit%2030s" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.85rem 2rem;">
+          ✉️ Envoyer mon extrait (Gratuit)
         </a>
       </div>
     </section>
-  </main>
+
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Studio Name — Ingenierie Son Professionnelle. <a href="mailto:contact@example.com">Contact</a></p>
+  </footer>
+
   <script>
-    const audioBefore = document.getElementById('audio-before');
-    const audioAfter = document.getElementById('audio-after');
-    const playBtn = document.getElementById('main-play-btn');
-    const btnBefore = document.getElementById('btn-before');
-    const btnAfter = document.getElementById('btn-after');
-    const seekBar = document.getElementById('seek-bar');
-    const timeCurrent = document.getElementById('time-current');
-    const timeDuration = document.getElementById('time-duration');
-    let isPlaying = false;
-    let currentMode = 'after';
-    audioBefore.volume = 0;
-    audioAfter.volume = 1;
+    const aB = document.getElementById('a-before');
+    const aA = document.getElementById('a-after');
+    const playBtn = document.getElementById('ab-play');
+    const btnB = document.getElementById('btn-before');
+    const btnA = document.getElementById('btn-after');
+    const seek = document.getElementById('ab-seek');
+    const cur = document.getElementById('ab-cur');
+    const dur = document.getElementById('ab-dur');
+    let playing = false;
+    aB.volume = 0; aA.volume = 1;
+
     function togglePlay() {
-      if (!isPlaying) {
-        audioBefore.currentTime = audioAfter.currentTime;
-        audioBefore.play();
-        audioAfter.play();
-        playBtn.innerText = '⏸';
-        isPlaying = true;
-      } else {
-        audioBefore.pause();
-        audioAfter.pause();
-        playBtn.innerText = '▶';
-        isPlaying = false;
-      }
+      if (!playing) { aB.currentTime = aA.currentTime; aB.play(); aA.play(); playBtn.innerText = '⏸'; playing = true; }
+      else { aB.pause(); aA.pause(); playBtn.innerText = '▶'; playing = false; }
     }
-    function switchAudioMode(mode) {
-      currentMode = mode;
-      if (mode === 'before') {
-        audioBefore.volume = 1;
-        audioAfter.volume = 0;
-        btnBefore.classList.add('active');
-        btnAfter.classList.remove('active');
-      } else {
-        audioBefore.volume = 0;
-        audioAfter.volume = 1;
-        btnAfter.classList.add('active');
-        btnBefore.classList.remove('active');
-      }
+    function switchMode(m) {
+      if (m === 'before') { aB.volume = 1; aA.volume = 0; btnB.classList.add('active'); btnA.classList.remove('active'); }
+      else { aB.volume = 0; aA.volume = 1; btnA.classList.add('active'); btnB.classList.remove('active'); }
     }
-    function seekAudio(value) {
-      if (audioAfter.duration) {
-        const seekTime = (value / 100) * audioAfter.duration;
-        audioBefore.currentTime = seekTime;
-        audioAfter.currentTime = seekTime;
-      }
-    }
-    audioAfter.addEventListener('timeupdate', () => {
-      if (audioAfter.duration) {
-        const progress = (audioAfter.currentTime / audioAfter.duration) * 100;
-        seekBar.value = progress;
-        timeCurrent.innerText = formatTime(audioAfter.currentTime);
-        timeDuration.innerText = formatTime(audioAfter.duration);
-      }
+    function seek(v) { if (aA.duration) { const t = (v/100)*aA.duration; aB.currentTime = t; aA.currentTime = t; } }
+    aA.addEventListener('timeupdate', () => {
+      if (aA.duration) { seek.value = (aA.currentTime/aA.duration)*100; cur.innerText = fmt(aA.currentTime); dur.innerText = fmt(aA.duration); }
     });
-    function formatTime(seconds) {
-      const min = Math.floor(seconds / 60);
-      const sec = Math.floor(seconds % 60);
-      return min + ':' + (sec < 10 ? '0' : '') + sec;
-    }
-    function loadTrack(demoKey, el) {
-      audioBefore.pause();
-      audioAfter.pause();
-      isPlaying = false;
-      playBtn.innerText = '▶';
-      document.querySelectorAll('.track-tab').forEach(tab => tab.classList.remove('active'));
+    function fmt(s) { return Math.floor(s/60)+':'+(Math.floor(s%60)<10?'0':'')+Math.floor(s%60); }
+    function loadTrack(key, el) {
+      aB.pause(); aA.pause(); playing = false; playBtn.innerText = '▶';
+      document.querySelectorAll('.ab-tab').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
-      if (demoKey === 'demo1') {
-        document.getElementById('current-track-title').innerText = 'Rappeur X - Titre Single';
-        document.getElementById('current-track-desc').innerText = 'Focus : EQ voix, nettoyage basses, largeur stereo & LUFS (-14dB)';
-        audioBefore.src = 'audio/demo1-before.mp3';
-        audioAfter.src = 'audio/demo1-after.mp3';
-      } else {
-        document.getElementById('current-track-title').innerText = 'Artiste Y - Track Drill';
-        document.getElementById('current-track-desc').innerText = 'Focus : Saturation tube, compression parallele et clarte des 808';
-        audioBefore.src = 'audio/demo2-before.mp3';
-        audioAfter.src = 'audio/demo2-after.mp3';
-      }
-      audioBefore.load();
-      audioAfter.load();
-      switchAudioMode('after');
+      if (key === 'demo1') { document.getElementById('ab-title').innerText = 'Rappeur X — Titre Single'; document.getElementById('ab-desc').innerText = 'Focus : EQ voix, nettoyage basses, largeur stereo, LUFS -14dB'; aB.src = 'audio/demo1-before.mp3'; aA.src = 'audio/demo1-after.mp3'; }
+      else { document.getElementById('ab-title').innerText = 'Artiste Y — Track Drill'; document.getElementById('ab-desc').innerText = 'Focus : Saturation tube, compression parallele, clarte 808'; aB.src = 'audio/demo2-before.mp3'; aA.src = 'audio/demo2-after.mp3'; }
+      aB.load(); aA.load(); switchMode('after');
     }
   </script>
 </body>
