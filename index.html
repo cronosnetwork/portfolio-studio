@@ -142,15 +142,14 @@
         </div>
         <div class="ab-controls">
           <button id="ab-play" class="ab-play" onclick="togglePlay()">▶</button>
-          <div class="ab-progress"><input type="range" id="ab-seek" value="0" min="0" max="100" oninput="seek(this.value)"></div>
+          <div class="ab-progress"><input type="range" id="ab-seek" value="0" min="0" max="100" oninput="seekTo(this.value)"></div>
           <div class="ab-time"><span id="ab-cur">0:00</span> / <span id="ab-dur">0:00</span></div>
         </div>
         <div class="ab-tips">
           <div class="ab-tip"><div class="ab-dot red"></div>Avant = enregistrement brut (home studio)</div>
           <div class="ab-tip"><div class="ab-dot green"></div>Apres = mixage + mastering pro</div>
         </div>
-        <audio id="a-before" preload="auto" src="audio/demo1-before.wav"></audio>
-        <audio id="a-after" preload="auto" src="audio/demo1-after.wav"></audio>
+        <audio id="ab-audio" preload="auto"></audio>
       </div>
     </section>
 
@@ -240,38 +239,61 @@
   </footer>
 
   <script>
-    const aB = document.getElementById('a-before');
-    const aA = document.getElementById('a-after');
+    const audio = document.getElementById('ab-audio');
     const playBtn = document.getElementById('ab-play');
     const btnB = document.getElementById('btn-before');
     const btnA = document.getElementById('btn-after');
     const seek = document.getElementById('ab-seek');
     const cur = document.getElementById('ab-cur');
     const dur = document.getElementById('ab-dur');
-    let playing = false;
-    aB.volume = 0; aA.volume = 1;
+    let currentMode = 'after';
+
+    const tracks = {
+      demo1: { title: 'Rappeur X — Titre Single', desc: 'Focus : EQ voix, nettoyage basses, largeur stereo, LUFS -14dB', before: 'audio/demo1-before.wav', after: 'audio/demo1-after.wav' },
+      demo2: { title: 'Artiste Y — Track Drill', desc: 'Focus : Saturation tube, compression parallele, clarte 808', before: 'audio/demo2-before.wav', after: 'audio/demo2-after.wav' }
+    };
+    let currentTrack = 'demo1';
+
+    function getSource() { return tracks[currentTrack][currentMode]; }
 
     function togglePlay() {
-      if (!playing) { aB.currentTime = aA.currentTime; aB.play(); aA.play(); playBtn.innerText = '⏸'; playing = true; }
-      else { aB.pause(); aA.pause(); playBtn.innerText = '▶'; playing = false; }
+      if (audio.paused) { audio.src = getSource(); audio.play(); playBtn.innerText = '⏸'; }
+      else { audio.pause(); playBtn.innerText = '▶'; }
     }
+
     function switchMode(m) {
-      if (m === 'before') { aB.volume = 1; aA.volume = 0; btnB.classList.add('active'); btnA.classList.remove('active'); }
-      else { aB.volume = 0; aA.volume = 1; btnA.classList.add('active'); btnB.classList.remove('active'); }
+      currentMode = m;
+      const wasPlaying = !audio.paused;
+      const pos = audio.currentTime;
+      if (wasPlaying) { audio.pause(); }
+      audio.src = getSource();
+      audio.currentTime = pos;
+      if (wasPlaying) { audio.play(); }
+      btnB.classList.toggle('active', m === 'before');
+      btnA.classList.toggle('active', m === 'after');
     }
-    function seek(v) { if (aA.duration) { const t = (v/100)*aA.duration; aB.currentTime = t; aA.currentTime = t; } }
-    aA.addEventListener('timeupdate', () => {
-      if (aA.duration) { seek.value = (aA.currentTime/aA.duration)*100; cur.innerText = fmt(aA.currentTime); dur.innerText = fmt(aA.duration); }
-    });
-    function fmt(s) { return Math.floor(s/60)+':'+(Math.floor(s%60)<10?'0':'')+Math.floor(s%60); }
+
     function loadTrack(key, el) {
-      aB.pause(); aA.pause(); playing = false; playBtn.innerText = '▶';
+      audio.pause(); playBtn.innerText = '▶';
       document.querySelectorAll('.ab-tab').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
-      if (key === 'demo1') { document.getElementById('ab-title').innerText = 'Rappeur X — Titre Single'; document.getElementById('ab-desc').innerText = 'Focus : EQ voix, nettoyage basses, largeur stereo, LUFS -14dB'; aB.src = 'audio/demo1-before.wav'; aA.src = 'audio/demo1-after.wav'; }
-      else { document.getElementById('ab-title').innerText = 'Artiste Y — Track Drill'; document.getElementById('ab-desc').innerText = 'Focus : Saturation tube, compression parallele, clarte 808'; aB.src = 'audio/demo2-before.wav'; aA.src = 'audio/demo2-after.wav'; }
-      aB.load(); aA.load(); switchMode('after');
+      currentTrack = key;
+      currentMode = 'after';
+      document.getElementById('ab-title').innerText = tracks[key].title;
+      document.getElementById('ab-desc').innerText = tracks[key].desc;
+      audio.src = getSource();
+      audio.currentTime = 0;
+      btnB.classList.remove('active');
+      btnA.classList.add('active');
+      seek.value = 0; cur.innerText = '0:00'; dur.innerText = '0:00';
     }
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) { seek.value = (audio.currentTime / audio.duration) * 100; cur.innerText = fmt(audio.currentTime); dur.innerText = fmt(audio.duration); }
+    });
+    audio.addEventListener('ended', () => { playBtn.innerText = '▶'; });
+    function seekTo(v) { if (audio.duration) { audio.currentTime = (v / 100) * audio.duration; } }
+    function fmt(s) { return Math.floor(s / 60) + ':' + (Math.floor(s % 60) < 10 ? '0' : '') + Math.floor(s % 60); }
   </script>
 </body>
 </html>
